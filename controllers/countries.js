@@ -1,10 +1,8 @@
-const Country = require('../models/country');
 const { response } = require('express');
+const { dbConnection } = require('../database/config');
 
 const getCountryInfo = async (req, res = response) => {
     const { country } = req.params;
-
-    console.log(`Received country parameter: ${country}`);
 
     if (!country) {
         return res.status(400).json({
@@ -14,12 +12,20 @@ const getCountryInfo = async (req, res = response) => {
     }
 
     try {
-        const countryInfo = await Country.find({ commonName: country });
+        const filter = {
+            'commonName': {
+                '$regex': country,
+                '$options': 'i'
+            }
+        };
 
-        console.log(`Query executed: ${country}`);
-        console.log(`Country info found: ${JSON.stringify(countryInfo)}`);
+        // Connect to the database (this will reuse the existing connection)
+        const db = await dbConnection();
+        const coll = db.collection('countries');  // Get the 'countries' collection
+        const result = await coll.find(filter).toArray();  // Query the collection
 
-        if (countryInfo.length === 0) {
+        // Check if no results found
+        if (result.length === 0) {
             return res.status(404).json({
                 ok: false,
                 msg: `No information found for country: ${country}`
@@ -28,10 +34,10 @@ const getCountryInfo = async (req, res = response) => {
 
         return res.json({
             ok: true,
-            countries: countryInfo
+            countries: result
         });
-
     } catch (error) {
+        console.log(error);
         return res.status(500).json({
             ok: false,
             msg: 'Error querying the database',
