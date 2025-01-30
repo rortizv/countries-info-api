@@ -3,22 +3,43 @@ const { dbConnection } = require('../database/config');
 const { getWeatherByCity } = require('../services/weatherService');
 
 const getCountryInfo = async (req, res = response) => {
-    const { country } = req.params;
 
-    if (!country) {
+    const param = req.params;
+
+    if (!param) {
         return res.status(400).json({
             ok: false,
-            msg: "No country provided in the request"
+            msg: "No param provided in the request"
         });
     }
 
     try {
-        const filter = {
-            'commonName': {
-                '$regex': country,
-                '$options': 'i'
-            }
-        };
+        let filter;
+        const key = Object.keys(param)[0];
+        const value = Object.values(param)[0];
+        switch (key) {
+            case 'country':
+                filter = {
+                    'commonName': {
+                        '$regex': value,
+                        '$options': 'i'
+                    }
+                };
+                break;
+            case 'continent':
+                filter = {
+                    'continent': {
+                        '$regex': value,
+                        '$options': 'i'
+                    }
+                };
+                break;
+            default:
+                return res.status(400).json({
+                    ok: false,
+                    msg: "Invalid param provided in the request"
+                });
+        }
 
         const db = await dbConnection(); // Connect to the database
         const countriesCollection = db.collection('countries'); // Get the 'countries' collection
@@ -28,7 +49,7 @@ const getCountryInfo = async (req, res = response) => {
         if (result.length === 0) {
             return res.status(404).json({
                 ok: false,
-                msg: `No information found for country: ${country}`
+                msg: `No information found for ${value}`
             });
         }
 
@@ -67,5 +88,5 @@ const getCountryInfo = async (req, res = response) => {
 };
 
 module.exports = {
-    getCountryInfo,
+    getCountryInfo
 };
