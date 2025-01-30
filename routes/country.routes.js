@@ -3,6 +3,8 @@ const { getCountryInfo } = require('../controllers/countries');
 
 const router = Router();
 
-router.get('/:country', getCountryInfo);
+router.get('/country/:country', getCountryInfo);
+
+router.get('/continent/:continent', getCountryInfo);
 
 module.exports = router;
