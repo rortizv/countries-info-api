@@ -10,17 +10,17 @@ So far, the database has the information about countries in South America.  Feel
 
 ### Get Country Info
 
-- **URL**: `/api/country-info/:country`
+- **URL**: `/api/country-info/country/:country`
 - **Method**: `GET`
 - **URL Parameters**: 
   - `country`: The name of the country you're looking for (can be partial).
   
 ### Example Requests
 
-- **Request**: `GET https://countries-info-api-1.onrender.com/api/country-info/guay`
+- **Request**: `GET https://countries-info-api-1.onrender.com/api/country-info/country/guay`
   - **Response**: Information about Uruguay and Paraguay.
   
-- **Request**: `GET https://countries-info-api-1.onrender.com/api/country-info/bra`
+- **Request**: `GET https://countries-info-api-1.onrender.com/api/country-info/country/bra`
   - **Response**: Information about Brazil.
 
 ## Features
@@ -32,7 +32,7 @@ So far, the database has the information about countries in South America.  Feel
 ## Production URL
 
 You can access the API at the following URL:
-`https://countries-info-api-1.onrender.com/api/country-info/<country_param>`
+`https://countries-info-api-1.onrender.com/api/country-info/country/<country_param>`
 
 
 Where `<country_param>` is the name or part of the name of the country you want information about.
@@ -43,11 +43,11 @@ To use this API, simply send a GET request to the above URL with a country name 
 
 ### Example:
 
-GET `https://countries-info-api-1.onrender.com/api/country-info/guay`
+GET `https://countries-info-api-1.onrender.com/api/country-info/country/guay`
 This request retrieves information about Uruguay and Paraguay
 
 
-GET `https://countries-info-api-1.onrender.com/api/country-info/bra`
+GET `https://countries-info-api-1.onrender.com/api/country-info/country/bra`
 This request retrieves information about Brazil
 
 
