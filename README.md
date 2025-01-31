@@ -1,27 +1,28 @@
 # Countries Info API
 
-This is a simple and free public REST API built with Node.js and Express that provides country-related information. The API allows users to retrieve information about a country by simply passing its name (or part of it) as a parameter in the URL.
+This is a simple and free public REST API built with Node.js and Express that provides country-related information. The API allows users to retrieve information about a country by simply passing its name (or part of it) as a parameter in the URL.  Also allows to get the countries data searching by continent.
 
 The data is stored in MongoDB.  The connection and data retrieving is done using the MongoDB driver for NodeJS.
 
-So far, the database has the information about countries in South America.  Feel free to search information about Argentina, Brazil, Colombia, Venezuela, Peru, Bolivia, Uruguay, Guyana, Paraguay, Ecuador, Chile and Suriname.
+The MongoDB has the data of all countries around the world 🌎.
+
 
 ## API Endpoint
 
-### Get Country Info
+### Get Countries info by country name
 
 - **URL**: `/api/country-info/country/:country`
 - **Method**: `GET`
 - **URL Parameters**: 
   - `country`: The name of the country you're looking for (can be partial).
   
-### Example Requests
+### Get Countries info by continent
 
-- **Request**: `GET https://countries-info-api-1.onrender.com/api/country-info/country/guay`
-  - **Response**: Information about Uruguay and Paraguay.
-  
-- **Request**: `GET https://countries-info-api-1.onrender.com/api/country-info/country/bra`
-  - **Response**: Information about Brazil.
+- **URL**: `/api/country-info/continent/:continent`
+- **Method**: `GET`
+- **URL Parameters**: 
+  - `continent`: The name of the continent you're looking for (can be partial).
+
 
 ## Features
 
@@ -33,9 +34,8 @@ So far, the database has the information about countries in South America.  Feel
 
 You can access the API at the following URL:
 `https://countries-info-api-1.onrender.com/api/country-info/country/<country_param>`
+`https://countries-info-api-1.onrender.com/api/country-info/continent/<continent_param>`
 
-
-Where `<country_param>` is the name or part of the name of the country you want information about.
 
 ## Usage
 
@@ -47,9 +47,23 @@ GET `https://countries-info-api-1.onrender.com/api/country-info/country/guay`
 This request retrieves information about Uruguay and Paraguay
 
 
-GET `https://countries-info-api-1.onrender.com/api/country-info/country/bra`
+GET `https://countries-info-api-1.onrender.com/api/country-info/country/brazil`
 This request retrieves information about Brazil
 
+
+By CONTINENT
+
+GET `https://countries-info-api-1.onrender.com/api/country-info/continent/north`
+This request retrieves information about all countries in North America
+
+
+GET `https://countries-info-api-1.onrender.com/api/country-info/continent/south`
+This request retrieves information about all countries in South America
+
+
+This is the list of all continents: `asia, africa, europe, oceania, north america, south america`
+
+Try searching for others and check out the response.
 
 ## No Authentication Required
 
