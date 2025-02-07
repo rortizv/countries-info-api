@@ -14,14 +14,14 @@ The MongoDB has the data of all countries around the world 🌎.
 - **URL**: `/api/country-info/country/:country`
 - **Method**: `GET`
 - **URL Parameters**: 
-  - `country`: The name of the country you're looking for (can be partial).
+  - `country`: The name of the country (in English) you're looking for (can be partial).
   
 ### Get Countries info by continent
 
 - **URL**: `/api/country-info/continent/:continent`
 - **Method**: `GET`
 - **URL Parameters**: 
-  - `continent`: The name of the continent you're looking for (can be partial).
+  - `continent`: The name of the continent (in English) you're looking for (can be partial).
 
 
 ## Features
